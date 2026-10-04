@@ -2,7 +2,10 @@ const fs=require('fs'),vm=require('vm'),assert=require('node:assert/strict');
 const html=fs.readFileSync(__dirname+'/index.html','utf8'),script=html.match(/<script>([\s\S]*?)<\/script>/)[1];
 const noop=()=>{},context=new Proxy({}, {get:(t,k)=>t[k]??noop,set:(t,k,v)=>(t[k]=v,true)}),elements={};
 function element(id){return elements[id]??={textContent:'',innerHTML:'',className:'',style:{},classList:{add:noop,remove:noop},addEventListener:noop,getContext:()=>context}}
-const sandbox={console,Math,Date,JSON,setTimeout:()=>1,clearTimeout:noop,setInterval:()=>1,clearInterval:noop,innerWidth:1280,innerHeight:800,localStorage:{getItem:()=>null,setItem:noop},document:{getElementById:element,querySelectorAll:()=>[],addEventListener:noop},window:{addEventListener:noop},requestAnimationFrame:noop};vm.createContext(sandbox);vm.runInContext(script,sandbox);
+const sandbox={console,Math,Date,JSON,setTimeout:()=>1,clearTimeout:noop,setInterval:()=>1,clearInterval:noop,devicePixelRatio:1,innerWidth:1280,innerHeight:800,localStorage:{getItem:()=>null,setItem:noop},document:{createElement:()=>({...element("texture"),width:512,height:128}),getElementById:element,querySelectorAll:()=>[],addEventListener:noop},window:{addEventListener:noop},requestAnimationFrame:noop};vm.createContext(sandbox);vm.runInContext(fs.readFileSync(__dirname+'/vendor/three.min.js','utf8'),sandbox);
+sandbox.THREE.WebGLRenderer=class {constructor(){this.shadowMap={}}setPixelRatio(){}setSize(){}render(){}};
+element('game').addEventListener=noop;
+vm.runInContext(script,sandbox);
 vm.runInContext(`
 state=fresh();hideModal();
 const rubbish=objects.find(o=>o.kind==='trash');player.x=rubbish.x;player.y=rubbish.y;interact();

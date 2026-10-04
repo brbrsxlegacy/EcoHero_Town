@@ -1,36 +1,29 @@
-# EcoHero Town
+# EcoHero Town 3D
 
-7–13 yaş için çevre bilincini oynayarak öğreten, bağımlılıksız bir HTML Canvas oyunu.
+Özgün geometrilerle oluşturulmuş, siyah dış çizgili 3D çevre macerası. Three.js 0.158.0 proje içinde bulunur; CDN bağlantısı gerekmez.
 
-## Oyna
+## Başlatma
 
-`index.html` dosyasını tarayıcıda aç. Kurulum, API anahtarı veya internet gerekmez.
-Alternatif: `python3 -m http.server 8080` komutunu proje dizininde çalıştır ve `http://localhost:8080` adresini aç.
-Vercel veya GitHub Pages gibi statik servislerde doğrudan yayınlanabilir; build gerekmez.
+Projenin tamamını indir ve `index.html` dosyasını Chrome/Edge/Firefox gibi WebGL destekli bir tarayıcıda aç. Statik hosting için kök dizini kullan; build gerekmez. `vendor/` klasörünü de yayınla.
 
 ## Kontroller
 
-- WASD / oklar: hareket
-- E / boşluk: en yakındaki nesneyle etkileşim
-- M: harita ve elektrikli otobüs
-- B: açılmış bisikleti kullan
-- Esc: menü
-- Dokunmatik: yön tuşları ve etkileşim düğmesi
+WASD / oklar: yürü. E / boşluk: etkileş. M: harita/elektrikli otobüs. B: bisiklet. Q / R veya ↻: kamerayı döndür. Esc: menü. Dokunmatik yön tuşları desteklenir.
 
-## Özellikler
+## 3D yenilikleri
 
-- Siyah dış çizgili, kodla çizilmiş özgün 2D çizgi film kasabası.
-- Yedi bölge; toplam kazanılan puanla açılır.
-- Çöp toplama, dört atık türünü ayırma, büyüyen fidanlar, su ve enerji tasarrufu.
-- Beş mini oyun: geri dönüşüm (sürükle veya tıkla), süreli temizlik, fidan dikme, boru yönleri, güneş paneli yönleri.
-- Puan harcama, kıyafet, şapka, çanta, bisiklet ve çiçekli ev dekoru.
-- NPC görevleri, başarımlar, Web Audio müzik ve efektler.
-- localStorage otomatik kayıt; açılan bölge ve seviyeler harcanan puanlardan etkilenmez.
+- Perspektif kamera, yumuşak takip ve döndürülebilir görüş.
+- Toon ışıklandırma, siyah siluet çizgileri, masaüstünde yumuşak gölgeler.
+- Eklemli karakter: yürüyüş, nefes, etkileşimde eğilme, bisiklet pedallama.
+- NPC el sallama, sallanan yapraklar, hareketli bulutlar, su damlaları ve zıplayan tavşanlar.
+- Üç boyutlu evler, çatılar, pencereler, banklar, lambalar, geri dönüşüm kutuları ve otobüsler.
+- Fidan büyümesi, kasaba canlanması, çiçekli ev dekoru ve ödül parçacıkları.
+- İlk sürümdeki yedi bölge, mini oyunlar, görevler, kıyafetler, puan ve rozetler korunur. Aynı tarayıcıdaki önceki kayıtlar uyumludur.
 
 ## Doğrulama
 
-`node test.cjs` ile oyun mantığı ve çizim fonksiyonları sahte DOM/Canvas ortamında kontrol edilir. Bu test gerçek tarayıcıda görsel kalite, ses veya dokunmatik doğrulaması değildir.
+`node test.cjs`: gerçek Three.js geometri/scene nesneleri ile sahte DOM ve renderer kullanarak oyun mantığını, sahne kurulumunu ve animasyon kodunun çalışmasını kontrol eder. WebGL piksel çıktısı, gerçek ses ve dokunmatik performansı bu testin kapsamı dışındadır.
 
-## Kapsam
+## Lisans
 
-Tek oyunculu ilk sürüm. Boru ve güneş paneli oyunları yön bulma bulmacalarıdır; fizik simülasyonu değildir. Mini oyunların yeniden oynanması rozet hedeflerine ulaşmayı sağlar. Çevre seviyesi bir oyun göstergesidir; gerçek karbon emisyonu ölçümü değildir. Yeni karakterler kıyafet/renk varyasyonlarıdır.
+Three.js MIT lisansı: `vendor/THREE-LICENSE.txt`. Oyunun modelleri kodla oluşturulur; dış model/asset paketi kullanılmaz.
